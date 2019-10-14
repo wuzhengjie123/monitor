@@ -16,6 +16,8 @@ public class MainMetricsBean {
 
     private AtomicInteger soneLongExceptionOrder;
 
+    private AtomicInteger shaxianExceptionOrder;
+
     public MainMetricsBean(MeterRegistry registry) {
 
         hlsExceptionOrder = registry.gauge("xy_asia.sone.hls_exception_order", Tags.of("gauge","exception_order"),
@@ -24,12 +26,17 @@ public class MainMetricsBean {
         soneExceptionOrder = registry.gauge("xy_asia.sone.sone_exception_order", Tags.of("gauge","exception_order"),
                 new AtomicInteger(0));
 
+        shaxianExceptionOrder = registry.gauge("xy_asia.shaxian.shaxian_exception_order", Tags.of("gauge","exception_order"),
+                new AtomicInteger(0));
+
 
         hlsLongExceptionOrder = registry.gauge("xy_asia.sone.hls_long_exception_order", Tags.of("gauge","long_exception_order"),
                 new AtomicInteger(0));
 
         soneLongExceptionOrder = registry.gauge("xy_asia.sone.sone_long_exception_order", Tags.of("gauge","long_exception_order"),
                 new AtomicInteger(0));
+
+
     }
 
 
@@ -47,5 +54,9 @@ public class MainMetricsBean {
 
     public void setSoneLongExceptionOrder(Integer soneLongExceptionOrder) {
         this.soneLongExceptionOrder.getAndSet(soneLongExceptionOrder);
+    }
+
+    public void setShaxianExceptionOrder(Integer shaxianExceptionOrder) {
+        this.shaxianExceptionOrder.getAndSet(shaxianExceptionOrder);
     }
 }

@@ -30,6 +30,14 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
+    @Bean(name = "shaxianDataSource")
+    @Qualifier("shaxianDataSource")
+    @ConfigurationProperties(prefix="spring.datasource.shaxian")
+    public DataSource shaxianDataSource() {
+        System.out.println("init spring shaxian datasource");
+        return DataSourceBuilder.create().build();
+    }
+
     @Bean(name = "primaryJdbcTemplate")
     public JdbcTemplate primaryJdbcTemplate(
             @Qualifier("primaryDataSource") DataSource dataSource) {
@@ -39,6 +47,12 @@ public class DataSourceConfig {
     @Bean(name = "secondaryJdbcTemplate")
     public JdbcTemplate secondaryJdbcTemplate(
             @Qualifier("secondaryDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean(name = "shaxianJdbcTemplate")
+    public JdbcTemplate shaxianJdbcTemplate(
+            @Qualifier("shaxianDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
